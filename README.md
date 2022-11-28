@@ -40,7 +40,35 @@ for a single whitespace, and with a leftwards symbol `↩` for a single line
 break. Each example is divided into two sections by three dashes `---`, the 
 first section is the Hypre syntax and the second part is generated HTML.
 
-## 4. Attributes
+Shorthands notations uses spaces after the opening symbol and before the
+closing symbol for block elements (`#‧foo‧#`), meanwhile for inline elements
+no spaces are added (`*foo*`).
+
+## 3. Comments
+
+Comments are portions of text that is parsed but does not generate HTML code.
+Everything after the exact sequence `/*` and before the exact sequence `*/`
+is considered a comment.
+
+``` HTML
+/* foo */
+---
+```
+
+Comment con be on multiple lines:
+
+``` HTML
+/* foo
+bar
+baz */
+---
+```
+
+## 5. Plain text
+
+TODO
+
+## 7. Attributes
 
 Hypre attributes are an alternative notation to express HTML attributes. There
 are four types of attributes: class, id, named attribute and boolean attribute.
@@ -56,14 +84,14 @@ are keep in the original order.
 | class             | .foo .bar  | class="foo bar" |
 | id                | #foo       | id="foo"        |
 | named attribute   | foo="bar"  | foo="bar"       |
-| boolean attribute | foo="true" | foo             |
+| boolean attribute | foo        | foo             |
 
-## 5. Elements
+## 7. Elements
 
-Hypre provides two types of notations to generate HTML elements: the standard
-notation and the shorthand notation.
+Hypre provides three types of notations to generate HTML elements: the standard
+notation, the shorthand notation and the special notatiion.
 
-### 5.1 Standard notation
+### 7.1 Standard notation
 
 The standard notation let's you generate any HTML elements. All tags are 
 expressed by adding a dollar sign `$` in front of the tag name: `div` becomes
@@ -96,12 +124,12 @@ $div: foo
 
 #### Structure
 
-| identifier | tag | attributes |opening symbol | content | closing symbol |
-| ---------  | --- | ---------- | ------------- | ------- | -------------- |
-| $          | tag | attributes | {             | content | }              |
-| $          | tag | attributes | :             | content |                |
+| identifier | tag | attributes | opening | content | closing |
+| ---------  | --- | ---------- | ------- | ------- | ------- |
+| $          | tag | attributes | {       | content | }       |
+| $          | tag | attributes | :       | content |         |
 
-### 5.1.1 Attributes
+### 7.1.1 Attributes
 
 Both multi lines and single lines standard elements can have HTML attributes
 and they must be expressed before the opening tag:
@@ -114,7 +142,7 @@ $div .baz: qux
 <div class="baz">qux</div>
 ```
 
-### 5.1.2 Nested elements
+### 7.1.2 Nested elements
 
 Nested elements can be expressed by adding an element inside braces for the
 multi line notation:
@@ -135,7 +163,7 @@ $div: $p: foo
 <div><p>foo</p></div>
 ```
 
-### 5.2 Shorthand notation
+### 7.2 Shorthand notation
 
 The shorthand notation is an alternative notation used to easily generate some 
 of the most common elements. It uses dedicated symbol to open and close the 
@@ -147,7 +175,7 @@ element, but does not require the tag name, for example:
 <h1>foo</h1>
 ```
 
-### 5.2.1 Attributes
+### 7.2.1 Attributes
 
 Attributes in the shorthand notations are expressed between braces `{ }` and as
 first thing after the opening symbol:
@@ -158,7 +186,7 @@ first thing after the opening symbol:
 <h2 class="foo" id="bar">baz</h2>
 ```
 
-### 5.2.2 Nested elements
+### 7.2.2 Nested elements
 
 In the shorthand notation elements can be nested by nesting an element inside
 the content of another one, for example:
@@ -172,18 +200,18 @@ the content of another one, for example:
 Also standard notation can used inside shorthand elements:
 
 ``` HTML
-= foo $span { bar} =
+= foo $span { bar } =
 ---
 <p><span>foo</span></p>
 ```
 
-### 5.2.3 Structure
+### 7.2.3 Structure
 
-| opening symbol | attributes | content | closing symbol |
-| -------------  | ---------- | ------- | -------------- |
-| #              | attributes | content | #              |
+| opening | attributes opening | attributes | attributes closing | content | closing |
+| ------- | ------------------ | ---------- | ------------------ | ------- | ------- |
+| #       | {                  | attributes | }                  | content | #       |
 
-### 5.2.4 Reference
+### 7.2.4 Reference
 
 #### Headings
 
@@ -207,10 +235,18 @@ Also standard notation can used inside shorthand elements:
 <p>foo</p>
 ```
 
+#### Blockquote
+
+``` HTML
+> foo <
+---
+<blockquote>foo</blockquote>
+```
+
 #### Strong
 
 ``` HTML
-* foo *
+*foo*
 ---
 <strong>foo</strong>
 ```
@@ -218,7 +254,7 @@ Also standard notation can used inside shorthand elements:
 #### Emphasis
 
 ``` HTML
-_ foo _
+_foo_
 ---
 <em>foo</em>
 ```
@@ -226,7 +262,36 @@ _ foo _
 #### Strikethrough
 
 ``` HTML
-~ foo ~
+~foo~
 ---
 <s>foo</s>
 ```
+
+#### Code
+
+``` HTML
+`foo`
+---
+<code>foo</code>
+```
+
+### 7.3 Special notations
+
+Special notations are a set of custom notations used to generate common used
+HTML, like lists and tables. Each special notation has its own rules.
+
+### 7.3.1 Links
+
+TODO
+
+### 7.3.2 Images
+
+TODO
+
+### 7.3.3 Lists
+
+TODO
+
+### 7.3.2 Tables
+
+TODO
