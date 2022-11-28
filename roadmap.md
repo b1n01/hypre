@@ -1,0 +1,5 @@
+- [ ] Define grammar to match plain text
+- [ ] Define grammar to match comments
+- [ ] Define grammar to match elements with the standard notation
+- [ ] Define grammar to match a list of attributes 
+- [ ] Define grammar to match shorthands attributes
